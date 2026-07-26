@@ -11,6 +11,7 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/android-knowledge-base-rag-mcp/' : '/',
   cleanUrls: true,
   lastUpdated: true,
+  ignoreDeadLinks: true,
   head: [
     ['meta', { name: 'theme-color', content: '#16864b' }],
     ['meta', { name: 'theme-color', content: '#0a0f1a', media: '(prefers-color-scheme: dark)' }],
