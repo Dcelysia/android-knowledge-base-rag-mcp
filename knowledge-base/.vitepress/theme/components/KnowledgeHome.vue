@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { withBase } from 'vitepress'
 import { data as articles } from '../../data/knowledge.data'
 
 const categoryLabels: Record<string, string> = {
@@ -95,7 +96,7 @@ function openSearch(): void {
           <a
             v-if="primaryArticle"
             class="kb-button kb-button--primary"
-            :href="primaryArticle.url"
+            :href="withBase(primaryArticle.url)"
           >
             开始阅读
             <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -148,7 +149,7 @@ function openSearch(): void {
 
         <div v-if="primaryArticle" class="kb-overview__latest">
           <span class="kb-overview__latest-label">最近更新</span>
-          <a :href="primaryArticle.url">
+          <a :href="withBase(primaryArticle.url)">
             <span>{{ primaryArticle.title }}</span>
             <svg viewBox="0 0 20 20" aria-hidden="true">
               <path d="M4 10h11m-4-4 4 4-4 4" />
@@ -193,7 +194,7 @@ function openSearch(): void {
           v-for="category in categories"
           :key="category.key"
           class="kb-category-card"
-          :href="category.firstArticle.url"
+          :href="withBase(category.firstArticle.url)"
         >
           <span class="kb-category-card__mark">{{ category.mark }}</span>
           <span class="kb-category-card__body">
@@ -232,7 +233,7 @@ function openSearch(): void {
           v-for="(article, index) in recentArticles"
           :key="article.url"
           class="kb-article-row"
-          :href="article.url"
+          :href="withBase(article.url)"
         >
           <span class="kb-article-row__index">{{ String(index + 1).padStart(2, '0') }}</span>
           <span class="kb-article-row__content">
