@@ -192,29 +192,33 @@ android-kb-mcp search "Activity 配置变更" --top-k 3
 
 ## 拉取更新与重新向量化
 
-GitHub 只同步 Markdown 和程序源码，不同步 `.chroma/`。从远程仓库拉取知识库更新后，推荐执行：
+GitHub 只同步 Markdown 和程序源码，不同步 `.chroma/`。仓库内置了 Git Hook；每次克隆后先为当前仓库启用一次：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+此后正常拉取即可：
 
 ```bash
 git pull --rebase
-source .venv/bin/activate
-android-kb-mcp reindex
-android-kb-mcp metadata
 ```
 
-Windows PowerShell 将激活命令替换为：
+`post-merge` 会处理普通拉取和快进更新，`post-rewrite` 会处理存在本地提交的 `git pull --rebase`。拉取成功后，Hook 自动执行 `.venv/bin/android-kb-mcp reindex`，重新计算全部知识文档的向量，并清理被删除或重命名文档留下的旧向量。
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+如果 `.venv` 尚未建立或向量服务暂时不可用，Hook 会输出提示但不会破坏已经完成的 Git 拉取。修复环境后可手动补跑：
+
+```bash
+.venv/bin/android-kb-mcp reindex
+.venv/bin/android-kb-mcp metadata
 ```
-
-`reindex` 是当前项目最可靠的同步方式。它会重新计算当前全部知识文档的向量，并清理被删除或重命名文档留下的旧向量。
 
 不同修改方式对应的处理策略如下：
 
 | 修改方式 | 是否需要手动向量化 | 推荐操作 |
 |---|---:|---|
 | 手动新增或修改 Markdown | 是 | 执行 `android-kb-mcp reindex` |
-| `git pull` 拉取他人更新 | 是 | 拉取后执行 `reindex` |
+| `git pull` 拉取他人更新 | 否 | 已启用仓库 Hook 时自动执行 `reindex` |
 | 手动删除或重命名 Markdown | 是 | 执行 `reindex`，同时清理陈旧向量 |
 | MCP `create_document` | 否 | Server 自动写入对应向量 |
 | MCP `update_document` | 否 | Server 自动重建对应向量 |
@@ -417,7 +421,7 @@ android-kb-mcp reindex
 
 查询向量和文档向量必须来自相同模型和相同维度。不同模型生成的向量不能放入同一个 Collection。
 
-通过 MCP 调用 `create_document`、`update_document` 或 `append_to_section` 时，只会重新向量化目标文档；`delete_document` 会同步删除对应向量。如果向量操作失败，文档修改会回滚。直接编辑 Markdown、执行 `git pull` 或手动重命名文件不会触发 MCP，需要运行 `android-kb-mcp reindex`。
+通过 MCP 调用 `create_document`、`update_document` 或 `append_to_section` 时，只会重新向量化目标文档；`delete_document` 会同步删除对应向量。如果向量操作失败，文档修改会回滚。直接编辑或手动重命名 Markdown 后仍需运行 `android-kb-mcp reindex`；已配置 `core.hooksPath=.githooks` 时，`git pull` 会由仓库 Hook 自动触发全量重建。
 
 ## 知识文档约定
 

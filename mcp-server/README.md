@@ -84,7 +84,9 @@ MCP_TRANSPORT=stdio
 - `metadata` 查看文件数与索引数是否一致。
 - `search` 验证嵌入和向量检索链路。
 
-MCP 的创建、更新和章节追加工具会自动重新向量化目标文档；直接编辑 Markdown 或拉取 Git 更新后，需要手动执行 `reindex`。
+MCP 的创建、更新和章节追加工具会自动重新向量化目标文档；直接编辑 Markdown 后需要手动执行 `reindex`。
+
+仓库根目录提供 `.githooks/post-merge` 和 `.githooks/post-rewrite`。执行一次 `git config core.hooksPath .githooks` 后，后续 `git pull` 会自动运行 `.venv/bin/android-kb-mcp reindex`。
 
 ### 6. 运行测试
 

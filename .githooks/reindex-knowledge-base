@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Keep the local vector store synchronized after Git updates the worktree.
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+cli="$repo_root/.venv/bin/android-kb-mcp"
+
+if [ ! -x "$cli" ]; then
+  printf '%s\n' "[git-hook] 未找到 $cli，跳过向量化；请先创建虚拟环境并安装 MCP Server。" >&2
+  exit 0
+fi
+
+printf '%s\n' '[git-hook] 正在同步知识库 Markdown 与本地向量索引...'
+if (cd "$repo_root" && "$cli" reindex); then
+  printf '%s\n' '[git-hook] 向量索引同步完成。'
+else
+  status=$?
+  printf '%s\n' "[git-hook] 向量索引同步失败（退出码 $status），请手动执行 .venv/bin/android-kb-mcp reindex。" >&2
+fi
+
+# A post-merge/post-rewrite failure must not invalidate an otherwise successful pull.
+exit 0
