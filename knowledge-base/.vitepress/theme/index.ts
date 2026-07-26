@@ -1,31 +1,31 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import './custom.css'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 
 function scrollToHash(to: string): void {
-  if (typeof window === 'undefined') return
-
   const hash = new URL(to, window.location.origin).hash
   if (!hash) return
 
-  const targetId = decodeURIComponent(hash.slice(1))
-  const restore = () => {
-    const target = document.getElementById(targetId)
-    if (!target) return
-
-    const root = document.documentElement
-    const previousBehavior = root.style.scrollBehavior
-    root.style.scrollBehavior = 'auto'
-    target.scrollIntoView({ block: 'start' })
-    root.style.scrollBehavior = previousBehavior
+  try {
+    document
+      .getElementById(decodeURIComponent(hash.slice(1)))
+      ?.scrollIntoView({ block: 'start', behavior: 'instant' })
+  } catch {
+    // Ignore malformed percent-encoded hashes and leave the page at the top.
   }
+}
 
-  // VitePress may reset scroll after hydration. Retry briefly after the first paint.
-  requestAnimationFrame(restore)
-  window.setTimeout(restore, 80)
-  window.setTimeout(restore, 240)
+function queueHashNavigation(to: string): void {
+  if (typeof window === 'undefined') return
+
+  const navigate = () => scrollToHash(to)
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(navigate, { timeout: 500 })
+  } else {
+    window.setTimeout(navigate, 0)
+  }
 }
 
 const theme: Theme = {
@@ -35,12 +35,20 @@ const theme: Theme = {
       'nav-bar-content-after': () => h(ThemeSwitcher),
     }),
   enhanceApp(context) {
-    context.router.onAfterRouteChange = scrollToHash
+    context.router.onAfterRouteChange = async (to) => {
+      await nextTick()
+      queueHashNavigation(to)
+    }
 
     if (typeof window !== 'undefined') {
-      const restoreInitialHash = () => scrollToHash(window.location.href)
-      window.addEventListener('load', restoreInitialHash, { once: true })
-      restoreInitialHash()
+      queueHashNavigation(window.location.href)
+      if (document.readyState !== 'complete') {
+        window.addEventListener(
+          'load',
+          () => queueHashNavigation(window.location.href),
+          { once: true },
+        )
+      }
     }
   },
 }

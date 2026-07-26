@@ -111,7 +111,7 @@ updated_at: '2026-07-23'
 
 协程不是线程，也不应简单理解成“对线程的封装”。更准确地说，协程是语言和运行时提供的轻量级并发抽象：它把一个逻辑任务表示成可暂停、保存状态并在之后恢复的状态机。
 
-> 需要继续追踪“为什么从线程/回调演化到协程，以及 `viewModelScope.launch -> SuspendLambda -> delay -> Handler -> resume` 如何完整执行”时，可进入 <a href="/computer-science/concurrency/kotlin-coroutine-suspension-and-resumption#kotlin-coroutine-deep-dive" target="_self">Kotlin 协程挂起、恢复与取消源码深挖</a>。
+> 需要继续追踪“为什么从线程/回调演化到协程，以及 `viewModelScope.launch -> SuspendLambda -> delay -> Handler -> resume` 如何完整执行”时，可阅读 <a class="kb-content-link" href="/computer-science/concurrency/kotlin-coroutine-suspension-and-resumption#kotlin-coroutine-deep-dive" target="_blank" rel="noopener noreferrer">Kotlin 协程挂起、恢复与取消源码深挖</a>。
 
 以 Kotlin 协程为例，挂起函数在编译后会保存：
 

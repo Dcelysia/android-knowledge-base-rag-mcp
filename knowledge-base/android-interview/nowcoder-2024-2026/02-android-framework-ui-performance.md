@@ -118,11 +118,7 @@ ViewRootImpl 发起遍历，核心阶段是 measure、layout、draw。
 - 何时从点击判定切换为滑动判定；
 - ACTION_DOWN 到后续事件必须保持一致的目标链。
 
-<a class="kb-deep-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_self">
-  <span class="kb-deep-link__eyebrow">深入阅读 · 源码链路</span>
-  <strong>View 事件分发、触摸目标与滑动冲突</strong>
-  <span>从 TouchTarget、DISALLOW_INTERCEPT、ACTION_CANCEL 展开，并给出外部拦截法和内部拦截法的具体实现。</span>
-</a>
+需要继续深挖 TouchTarget、`DISALLOW_INTERCEPT`、`ACTION_CANCEL` 以及两种滑动冲突处理方案时，可阅读 <a class="kb-content-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_blank" rel="noopener noreferrer">View 事件分发、触摸目标与滑动冲突</a>。
 
 ## 自定义 View
 

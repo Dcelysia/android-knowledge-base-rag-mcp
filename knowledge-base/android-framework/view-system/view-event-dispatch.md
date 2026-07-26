@@ -26,7 +26,7 @@ verified_at: '2026-07-23'
 
 # View 事件分发、触摸目标与滑动冲突：从源码链路到两种拦截法
 
-> 本文是事件分发的深挖层，适合在忘记细节、排查滑动冲突或准备源码追问时查阅。只想快速复习时，可返回 <a href="/八股/Android高级/02-Handler-View-RecyclerView-Fragment-WebView#view-event-dispatch-overview" target="_self">Android 高级八股中的事件分发速览</a>。
+> 本文是事件分发的深挖层，适合在忘记细节、排查滑动冲突或准备源码追问时查阅。只想快速复习时，可阅读 <a class="kb-content-link" href="/八股/Android高级/02-Handler-View-RecyclerView-Fragment-WebView#view-event-dispatch-overview" target="_blank" rel="noopener noreferrer">Android 高级八股中的事件分发速览</a>。
 
 ## 1. 先建立正确模型：系统在决定“这次手势归谁”
 

@@ -180,11 +180,7 @@ ViewGroup 在 DOWN 时清理上一段手势状态；未拦截时倒序命中子 
 - 外部拦截法：父容器在 `onInterceptTouchEvent` 中根据 `touchSlop`、方向和子 View 边界统一决定是否接管。
 - 内部拦截法：子 View 在 DOWN 时调用 `requestDisallowInterceptTouchEvent(true)`，先禁止祖先拦截；MOVE 判断应交给父容器时再传 false。这个标记会沿 parent 链向上传递，并在手势结束时重置。
 
-<a class="kb-deep-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_self">
-  <span class="kb-deep-link__eyebrow">深入阅读 · 原理、源码与代码实现</span>
-  <strong>View 事件分发、触摸目标与滑动冲突</strong>
-  <span>查看 ViewRootImpl 到 ViewGroup 的完整链路、mFirstTouchTarget 状态机、ACTION_CANCEL，以及外部/内部拦截法的可运行 Kotlin 写法。</span>
-</a>
+需要查看 ViewRootImpl 到 ViewGroup 的完整链路、`mFirstTouchTarget` 状态机、`ACTION_CANCEL` 与可运行的 Kotlin 拦截方案时，可阅读 <a class="kb-content-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_blank" rel="noopener noreferrer">View 事件分发、触摸目标与滑动冲突</a>。
 
 ### 6.7 View 绘制补充题
 

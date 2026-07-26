@@ -93,6 +93,28 @@ Server 会合并 content 中已有 frontmatter 与 metadata 参数，补全创�
 
 全量 upsert 当前文件，并删除没有对应 Markdown 的陈旧向量。手动改过文件、切换嵌入模型或怀疑索引不一致时调用。
 
+## 内容跳转规范
+
+通过 `create_document`、`update_document` 或 `append_to_section` 新增知识库内部的跨文档跳转时，统一使用正文内联高亮链接，不使用独立卡片、按钮或 `target="_self"`。
+
+目标内容前放置稳定、唯一、使用 kebab-case 的锚点：
+
+```html
+<span id="view-event-dispatch-deep-dive" class="kb-anchor-offset"></span>
+```
+
+来源文档把链接自然地写进句子中，文档路由不带 `.md`：
+
+```html
+需要继续深入时，可阅读 <a class="kb-content-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_blank" rel="noopener noreferrer">View 事件分发源码链路</a>。
+```
+
+- 已有合适锚点时直接复用，不重复添加。
+- 链接必须带 `target="_blank"`，在新页面打开。
+- 链接必须带 `rel="noopener noreferrer"`。
+- 只高亮实际可点击的链接文字，不把整段内容包装成卡片。
+- 样式和定位逻辑由 VitePress 主题统一处理，MCP 写文档时不修改 `.vitepress`。
+
 ## Resources
 
 | URI | 内容 |

@@ -28,7 +28,7 @@ verified_at: '2026-07-23'
 
 # Kotlin 协程为什么出现，以及挂起、恢复与取消的源码链路
 
-> 本文是协程的深挖层：先重建同步、线程和回调方案，再沿一条可验证的 Android 链路解释协程如何启动、挂起、被外部事件持有、恢复和取消。只想复习进程、线程与协程的关系时，可返回 <a href="/computer-science/concurrency/process-thread-coroutine#coroutine-overview" target="_self">进程、线程与协程总览</a>。
+> 本文是协程的深挖层：先重建同步、线程和回调方案，再沿一条可验证的 Android 链路解释协程如何启动、挂起、被外部事件持有、恢复和取消。只想复习进程、线程与协程的关系时，可阅读 <a class="kb-content-link" href="/computer-science/concurrency/process-thread-coroutine#coroutine-overview" target="_blank" rel="noopener noreferrer">进程、线程与协程总览</a>。
 
 ## 1. 一句话结论
 
