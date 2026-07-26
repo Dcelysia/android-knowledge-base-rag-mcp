@@ -272,6 +272,45 @@ body {
   color: var(--vp-c-brand-1);
 }
 
+.vp-doc .kb-anchor-offset {
+  display: block;
+  scroll-margin-top: 84px;
+}
+
+.vp-doc .kb-content-link {
+  background: linear-gradient(
+    to bottom,
+    transparent 58%,
+    color-mix(in srgb, var(--vp-c-brand-soft) 82%, transparent) 58%
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 42%, transparent);
+  color: var(--vp-c-brand-1);
+  font-weight: 650;
+  padding: 0 0.08em;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.vp-doc .kb-content-link::after {
+  content: ' ↗';
+  font-size: 0.78em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.vp-doc .kb-content-link:hover {
+  background: var(--vp-c-brand-soft);
+  border-bottom-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-2);
+}
+
+.vp-doc .kb-content-link:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+}
+
 .vp-doc :not(pre) > code {
   background: var(--vp-c-brand-soft);
   border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
@@ -287,6 +326,42 @@ body {
   display: table;
   overflow: hidden;
   width: 100%;
+}
+
+.coroutine-deep-dive-page .VPDoc .container > .content,
+.coroutine-deep-dive-page .VPDoc .content-container,
+.coroutine-deep-dive-page .vp-doc {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.coroutine-deep-dive-page .vp-doc table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+  width: max-content;
+  -webkit-overflow-scrolling: touch;
+}
+
+.coroutine-deep-dive-page .vp-doc div[class*='language-'],
+.coroutine-deep-dive-page .vp-doc pre {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.coroutine-deep-dive-page .vp-doc pre {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.coroutine-deep-dive-page .vp-doc p,
+.coroutine-deep-dive-page .vp-doc li {
+  overflow-wrap: anywhere;
 }
 
 .vp-doc tr:nth-child(2n) {

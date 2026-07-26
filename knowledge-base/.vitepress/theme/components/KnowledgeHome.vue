@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import { computed } from 'vue'
 import { data as articles } from '../../data/knowledge.data'
 
 const categoryLabels: Record<string, string> = {

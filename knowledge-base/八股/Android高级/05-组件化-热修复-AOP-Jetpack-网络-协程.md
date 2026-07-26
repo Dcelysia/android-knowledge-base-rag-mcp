@@ -216,7 +216,11 @@ Dispatcher 负责同步/异步请求调度，维护 ready/running 队列，并�
 
 ### 26.1 协程是什么
 
+<span id="coroutine-overview" class="kb-anchor-offset"></span>
+
 协程是轻量级并发抽象，不等于线程。协程运行在线程之上，可以挂起和恢复。挂起不会阻塞线程，线程可以去执行其他任务。
+
+面试继续追问“为什么要从线程和回调演化到协程”“挂起后线程去了哪里”“`Continuation`、状态机、Dispatcher、Job 和 Android Handler 如何串起来”时，可阅读 [Kotlin 协程挂起、恢复与取消源码深挖](/computer-science/concurrency/kotlin-coroutine-suspension-and-resumption#kotlin-coroutine-deep-dive)。
 
 ### 26.2 Dispatchers
 

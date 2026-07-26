@@ -8,8 +8,8 @@
 
 - 使用 VitePress 浏览 Markdown 知识库，支持侧边栏、全文搜索、深色模式和开发时热更新。
 - 使用 ChromaDB 保存本地向量索引，向量数据可以随时由 Markdown 重建。
-- 默认使用 `Qwen/Qwen3-Embedding-0.6B` 在本地生成语义向量，不要求 OpenAI API Key。
-- 可选使用 OpenAI Embeddings 或兼容接口作为云端嵌入服务。
+- 推荐通过硅基流动在线调用国产 `Qwen/Qwen3-Embedding-0.6B`，降低本机内存占用和首次索引时间。
+- 可选在本地运行同一 Qwen3 模型，满足离线使用需求。
 - 提供 MCP tools 和 resources，供 AI 客户端按需检索和安全编辑知识库。
 - 支持全量重建索引、指定目录导入、元数据过滤、标签过滤和余弦相似度搜索。
 - 文档写入与向量更新具备一致性保护；更新失败时会尽可能恢复原文件和原索引。
@@ -25,7 +25,7 @@ flowchart LR
     A["Codex / Claude Desktop"] --> M["MCP Server"]
     M --> S["KnowledgeService"]
     S --> F
-    S --> E["Qwen3 / OpenAI Embeddings"]
+    S --> E["硅基流动 Qwen3 / 本地 Qwen3"]
     E --> C["ChromaDB 本地向量索引"]
     C --> S
 ```
@@ -45,8 +45,9 @@ flowchart LR
 | 文档与前端 | Markdown、VitePress、Vue |
 | MCP Server | Python、MCP Python SDK |
 | 向量数据库 | ChromaDB |
-| 默认嵌入模型 | `Qwen/Qwen3-Embedding-0.6B` |
-| 可选嵌入服务 | OpenAI Embeddings / OpenAI 兼容接口 |
+| 推荐嵌入服务 | 硅基流动 OpenAI 兼容接口 |
+| 嵌入模型 | `Qwen/Qwen3-Embedding-0.6B`，1024 维 |
+| 离线备选 | Sentence Transformers 本地 Qwen3 |
 | AI 客户端 | Codex、Claude Desktop 或其他 MCP 客户端 |
 
 ## 环境要求
@@ -55,8 +56,8 @@ flowchart LR
 - Node.js 18 或更高版本
 - npm
 - Python 3.10 或更高版本，推荐 Python 3.12
-- 首次使用本地嵌入模型时需要访问模型仓库
-- 本地模型、Python 依赖和向量索引需要数 GB 可用磁盘空间
+- 使用在线嵌入服务时需要访问硅基流动 API
+- 仅启用本地模型时需要访问模型仓库，并预留数 GB 磁盘和运行内存
 
 本项目主要在 macOS 上使用和验证。Linux、Windows 可根据本机 Python、PyTorch 和 MCP 客户端的路径规则调整命令；`LOCAL_EMBEDDING_DEVICE=auto` 会依次选择可用的 MPS、CUDA 或 CPU。
 
@@ -110,10 +111,16 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-安装 MCP Server、本地模型和开发依赖：
+安装 MCP Server 和开发依赖：
 
 ```bash
 python -m pip install --upgrade pip
+python -m pip install -e './mcp-server[dev]'
+```
+
+只有需要离线运行本地模型时，才安装额外依赖：
+
+```bash
 python -m pip install -e './mcp-server[dev,local-models]'
 ```
 
@@ -137,24 +144,25 @@ Windows PowerShell：
 Copy-Item .env.example .env
 ```
 
-默认模板已经配置为本地 Qwen3 嵌入模式，通常无需填写 OpenAI API Key。主要配置如下：
+推荐使用硅基流动在线运行国产 Qwen3 Embedding。创建 API Key 后，将完整密钥写入 `EMBEDDING_API_KEY`：
 
 ```dotenv
-EMBEDDING_PROVIDER=sentence-transformers
-LOCAL_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
-LOCAL_EMBEDDING_CACHE_PATH=.model-cache/huggingface
-LOCAL_EMBEDDING_DEVICE=auto
-LOCAL_EMBEDDING_BATCH_SIZE=8
-HF_HUB_OFFLINE=0
-TRANSFORMERS_OFFLINE=0
+EMBEDDING_PROVIDER=openai
+EMBEDDING_API_KEY=<YOUR_SILICONFLOW_API_KEY>
+OPENAI_BASE_URL=https://api.siliconflow.cn/v1
+OPENAI_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
+OPENAI_EMBEDDING_DIMENSIONS=1024
+OPENAI_EMBEDDING_BATCH_SIZE=8
+OPENAI_TIMEOUT_SECONDS=30
+OPENAI_MAX_RETRIES=4
 
 KNOWLEDGE_BASE_PATH=knowledge-base
 CHROMA_PERSIST_PATH=.chroma
-CHROMA_COLLECTION=android_knowledge_qwen3_06b
+CHROMA_COLLECTION=android_knowledge_siliconflow_qwen3_06b_1024_v1
 MCP_TRANSPORT=stdio
 ```
 
-`.env` 已被 `.gitignore` 排除。不要将 API Key、内部地址或其他敏感配置提交到仓库。
+`EMBEDDING_API_KEY` 优先于兼容旧配置的 `OPENAI_API_KEY`，可以避免宿主环境中已有的 OpenAI Key 覆盖项目密钥。`.env` 已被 `.gitignore` 排除；不要在聊天、日志或 Git 提交中暴露 API Key。
 
 ### 5. 建立向量索引
 
@@ -162,7 +170,7 @@ MCP_TRANSPORT=stdio
 android-kb-mcp reindex
 ```
 
-第一次执行时会下载 `Qwen/Qwen3-Embedding-0.6B`。下载完成后，命令将：
+在线模式不会在本机下载或加载模型。命令将：
 
 1. 扫描 `knowledge-base/` 下的知识文档；
 2. 解析 Markdown frontmatter、标题、标签和正文；
@@ -182,38 +190,35 @@ android-kb-mcp metadata
 android-kb-mcp search "Activity 配置变更" --top-k 3
 ```
 
-如果本地模型已经成功下载，并且以后希望完全离线加载，可以把 `.env` 改为：
-
-```dotenv
-HF_HUB_OFFLINE=1
-TRANSFORMERS_OFFLINE=1
-```
-
 ## 拉取更新与重新向量化
 
-GitHub 只同步 Markdown 和程序源码，不同步 `.chroma/`。从远程仓库拉取知识库更新后，推荐执行：
+GitHub 只同步 Markdown 和程序源码，不同步 `.chroma/`。仓库内置了 Git Hook；每次克隆后先为当前仓库启用一次：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+此后正常拉取即可：
 
 ```bash
 git pull --rebase
-source .venv/bin/activate
-android-kb-mcp reindex
-android-kb-mcp metadata
 ```
 
-Windows PowerShell 将激活命令替换为：
+`post-merge` 会处理普通拉取和快进更新，`post-rewrite` 会处理存在本地提交的 `git pull --rebase`。拉取成功后，Hook 自动执行 `.venv/bin/android-kb-mcp reindex`，重新计算全部知识文档的向量，并清理被删除或重命名文档留下的旧向量。
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+如果 `.venv` 尚未建立或向量服务暂时不可用，Hook 会输出提示但不会破坏已经完成的 Git 拉取。修复环境后可手动补跑：
+
+```bash
+.venv/bin/android-kb-mcp reindex
+.venv/bin/android-kb-mcp metadata
 ```
-
-`reindex` 是当前项目最可靠的同步方式。它会重新计算当前全部知识文档的向量，并清理被删除或重命名文档留下的旧向量。
 
 不同修改方式对应的处理策略如下：
 
 | 修改方式 | 是否需要手动向量化 | 推荐操作 |
 |---|---:|---|
 | 手动新增或修改 Markdown | 是 | 执行 `android-kb-mcp reindex` |
-| `git pull` 拉取他人更新 | 是 | 拉取后执行 `reindex` |
+| `git pull` 拉取他人更新 | 否 | 已启用仓库 Hook 时自动执行 `reindex` |
 | 手动删除或重命名 Markdown | 是 | 执行 `reindex`，同时清理陈旧向量 |
 | MCP `create_document` | 否 | Server 自动写入对应向量 |
 | MCP `update_document` | 否 | Server 自动重建对应向量 |
@@ -259,11 +264,17 @@ npm run docs:preview -- --open
 
 ### 部署到 GitHub Pages
 
-当前仓库提供 VitePress 静态构建能力，但没有预设 GitHub Pages 工作流。部署到 GitHub Pages 时需要额外配置：
+仓库通过 `.github/workflows/deploy-pages.yml` 自动发布 VitePress 静态站点。推送到 `main` 后，GitHub Actions 会使用 `/android-knowledge-base-rag-mcp/` 作为站点 base，构建并部署到：
 
-- GitHub Actions 构建与发布流程；
-- 项目站点使用的 VitePress `base` 路径；
-- Repository Settings 中的 Pages 发布来源。
+```text
+https://timeisthe.github.io/android-knowledge-base-rag-mcp/
+```
+
+也可以在 GitHub Actions 页面手动运行 `Deploy VitePress to GitHub Pages` 工作流。发布前可在本地执行：
+
+```bash
+VITEPRESS_BASE=/android-knowledge-base-rag-mcp/ npm run docs:build
+```
 
 GitHub Pages 只能托管静态前端，不能运行本项目的 Python MCP Server、嵌入模型或 ChromaDB。RAG 和 MCP 默认仍在使用者本机运行。
 
@@ -355,30 +366,51 @@ android-kb-mcp serve
 
 ## 嵌入模型配置
 
-### 默认：Qwen3 本地模型
+### 推荐：硅基流动在线 Qwen3
+
+```dotenv
+EMBEDDING_PROVIDER=openai
+EMBEDDING_API_KEY=<YOUR_SILICONFLOW_API_KEY>
+OPENAI_BASE_URL=https://api.siliconflow.cn/v1
+OPENAI_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
+OPENAI_EMBEDDING_DIMENSIONS=1024
+OPENAI_EMBEDDING_BATCH_SIZE=8
+OPENAI_TIMEOUT_SECONDS=30
+OPENAI_MAX_RETRIES=4
+OPENAI_EMBEDDING_QUERY_INSTRUCTION=
+CHROMA_COLLECTION=android_knowledge_siliconflow_qwen3_06b_1024_v1
+```
+
+远端请求会按照 `OPENAI_EMBEDDING_BATCH_SIZE` 分批提交。OpenAI SDK 会对限流和临时服务错误执行指数退避重试；空的 `OPENAI_EMBEDDING_QUERY_INSTRUCTION` 会复用本地 Qwen 查询指令配置。
+
+这里的 `EMBEDDING_PROVIDER=openai` 表示使用 OpenAI 兼容协议，实际服务和模型仍分别来自国内的硅基流动与 Qwen。
+
+### 备选：Qwen3 本地模型
 
 ```dotenv
 EMBEDDING_PROVIDER=sentence-transformers
 LOCAL_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
+LOCAL_EMBEDDING_CACHE_PATH=.model-cache/huggingface
 LOCAL_EMBEDDING_DEVICE=auto
 LOCAL_EMBEDDING_BATCH_SIZE=8
-CHROMA_COLLECTION=android_knowledge_qwen3_06b
+LOCAL_EMBEDDING_QUERY_INSTRUCTION=Given an Android technical interview question, retrieve relevant knowledge-base documents that answer the question
+HF_HUB_OFFLINE=0
+TRANSFORMERS_OFFLINE=0
+CHROMA_COLLECTION=android_knowledge_local_qwen3_06b_1024_v1
 ```
 
-如果内存不足，可以降低批量大小或强制使用 CPU：
+首次运行会下载模型。如果内存不足，可以降低批量大小或强制使用 CPU：
 
 ```dotenv
 LOCAL_EMBEDDING_BATCH_SIZE=2
 LOCAL_EMBEDDING_DEVICE=cpu
 ```
 
-### 可选：OpenAI Embeddings
+模型下载完成后如需完全离线加载：
 
 ```dotenv
-EMBEDDING_PROVIDER=openai
-OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-CHROMA_COLLECTION=android_knowledge_openai_small
+HF_HUB_OFFLINE=1
+TRANSFORMERS_OFFLINE=1
 ```
 
 修改 Provider、模型或向量维度后，必须使用新的 Chroma Collection 或清理旧索引，再执行：
@@ -388,6 +420,8 @@ android-kb-mcp reindex
 ```
 
 查询向量和文档向量必须来自相同模型和相同维度。不同模型生成的向量不能放入同一个 Collection。
+
+通过 MCP 调用 `create_document`、`update_document` 或 `append_to_section` 时，只会重新向量化目标文档；`delete_document` 会同步删除对应向量。如果向量操作失败，文档修改会回滚。直接编辑或手动重命名 Markdown 后仍需运行 `android-kb-mcp reindex`；已配置 `core.hooksPath=.githooks` 时，`git pull` 会由仓库 Hook 自动触发全量重建。
 
 ## 知识文档约定
 
@@ -412,6 +446,31 @@ subcategory: four-components
 
 - [Android Developers](https://developer.android.com/)
 ```
+
+### 内容分层约定
+
+知识库采用“速览层 + 深挖层”，避免八股页面既过长又缺少细节：
+
+- 速览层：位于 `knowledge-base/八股/` 和面试总结目录，保留高频结论、回答骨架和关键边界，适合快速复习。
+- 深挖层：位于对应技术分类目录，例如 `android-framework/view-system/`，展开角色关系、内部状态、源码链路、具体实现和容易误解的边界。
+- 速览中的可扩展主题应使用正文内联高亮链接跳转到深挖文章；深挖文章顶部应提供返回速览的链接。
+
+深挖文章默认覆盖：
+
+1. 类或模块在系统中的角色，以及和其他对象的关系。
+2. 关键字段、状态、初始化逻辑和生命周期。
+3. 核心方法的输入、处理流程、状态变化和输出。
+4. 可运行或接近可运行的代码实现。
+5. 常见误解、失败场景和版本边界。
+6. 当前官方文档与源码参考。
+
+速览页中的跳转链接示例：
+
+```markdown
+需要继续深入时，可阅读 [View 事件分发、触摸目标与滑动冲突](/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive)。
+```
+
+目标内容前使用 `<span id="view-event-dispatch-deep-dive" class="kb-anchor-offset"></span>` 定义稳定锚点。VitePress 主题会自动为站内锚点链接添加高亮样式、新标签页属性，并适配 GitHub Pages 子路径。
 
 索引文本由标题、标签和正文共同组成。`index.md` 和 `.vitepress/` 下的文件不会作为 RAG 知识文档写入 ChromaDB。
 
@@ -475,10 +534,22 @@ android-kb-mcp --help
 
 ### 提示缺少 `sentence-transformers` 或 `torch`
 
+只有本地模型模式需要这些依赖：
+
 ```bash
 source .venv/bin/activate
 python -m pip install -e './mcp-server[dev,local-models]'
 ```
+
+### 硅基流动返回 `401 Token is invalid`
+
+确认 `.env` 使用完整的 Secret Key，并优先配置专用变量：
+
+```dotenv
+EMBEDDING_API_KEY=sk-完整密钥
+```
+
+不要把密钥 ID、已撤销的 Key 或页面中的掩码文本当成 Secret Key。修改 `.env` 后需要完全重启 MCP 客户端。
 
 ### Qwen3 在 MPS 上内存不足
 
@@ -543,7 +614,7 @@ knowledge-base/.vitepress/dist/
 ## 其他文档
 
 - [USAGE.md](./USAGE.md)：MCP tools、resources、过滤器和 AI 编辑示例。
-- [COSTS.md](./COSTS.md)：本地模型、OpenAI 嵌入成本和规模增长建议。
+- [COSTS.md](./COSTS.md)：硅基流动在线嵌入、本地模型备选、费用触发点和规模增长建议。
 - [mcp-server/README.md](./mcp-server/README.md)：Python MCP Server 独立开发指南。
 
 ## 许可证

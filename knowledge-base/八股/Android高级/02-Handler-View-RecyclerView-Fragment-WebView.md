@@ -159,17 +159,28 @@ ANR 不是 Handler 直接抛出的异常，而是主线程消息处理被阻塞�
 
 `GLSurfaceView` 封装 EGL/OpenGL 渲染线程，适合 OpenGL 场景。
 
+<span id="view-event-dispatch-overview" class="kb-anchor-offset"></span>
+
 ### 6.6 事件分发
 
-核心方法：
+事件分发真正解决的是“这次从 DOWN 开始的手势归谁”。核心方法：
 
 - `dispatchTouchEvent`：分发事件。
 - `onInterceptTouchEvent`：ViewGroup 决定是否拦截。
 - `onTouchEvent`：View 自己消费事件。
 
-大致链路：Activity -> Window -> DecorView -> ViewGroup -> 子 View。
+入口链路可概括为：ViewRootImpl -> DecorView -> Activity -> Window -> DecorView/ViewGroup -> 子 View。DecorView 看似出现两次，是因为它先通过 Window.Callback 把事件交给 Activity，Activity 再通过 Window.superDispatchTouchEvent 进入 DecorView 父类的 ViewGroup 分发。
 
-如果 `ACTION_DOWN` 没有被某个 View 消费，后续 MOVE/UP 通常不会再分发给它。滑动冲突常用外部拦截法和内部拦截法，内部拦截依赖 `requestDisallowInterceptTouchEvent(true)`。
+ViewGroup 在 DOWN 时清理上一段手势状态；未拦截时倒序命中子 View。子 View 消费 DOWN 后，会被记录为本次手势的 TouchTarget，后续 MOVE/UP 沿这个目标继续分发，而不是每次重新寻找子 View。
+
+父容器可以在 MOVE 阶段中途拦截。此时原子 View 收到 `ACTION_CANCEL`，父容器从当前事件开始在自己的 `onTouchEvent` 中接管。若 DOWN 没有被某个 View 消费，后续 MOVE/UP 通常不会再分发给它。
+
+滑动冲突的两种经典方案：
+
+- 外部拦截法：父容器在 `onInterceptTouchEvent` 中根据 `touchSlop`、方向和子 View 边界统一决定是否接管。
+- 内部拦截法：子 View 在 DOWN 时调用 `requestDisallowInterceptTouchEvent(true)`，先禁止祖先拦截；MOVE 判断应交给父容器时再传 false。这个标记会沿 parent 链向上传递，并在手势结束时重置。
+
+需要查看 ViewRootImpl 到 ViewGroup 的完整链路、`mFirstTouchTarget` 状态机、`ACTION_CANCEL` 与可运行的 Kotlin 拦截方案时，可阅读 [View 事件分发、触摸目标与滑动冲突](/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive)。
 
 ### 6.7 View 绘制补充题
 

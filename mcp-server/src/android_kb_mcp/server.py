@@ -11,11 +11,22 @@ from .factory import build_service
 from .service import KnowledgeService
 
 
+CONTENT_LINK_AUTHORING_RULE = (
+    "编写或修改知识库正文时，跨文档跳转必须使用正文内联高亮链接，禁止使用卡片、按钮或 "
+    "target=\"_self\"。目标内容前应放置稳定且唯一的锚点 "
+    "<span id=\"stable-kebab-case-id\" class=\"kb-anchor-offset\"></span>；来源链接固定写成 "
+    "[链接文字](/文档路由#stable-kebab-case-id)。文档路由不带 .md；已有合适锚点时应复用。"
+    "VitePress 主题会统一渲染为 kb-content-link，并添加 target=\"_blank\" 与 "
+    "rel=\"noopener noreferrer\"，不要在正文中手写 <a>。"
+)
+
+
 mcp = FastMCP(
     "Android Interview Knowledge Base",
     instructions=(
         "先用 search_knowledge 定位相关文档；需要完整内容时再调用 "
-        "get_document。所有写操作都会同步更新 Markdown 与向量索引。"
+        "get_document。所有写操作都会同步更新 Markdown 与向量索引。 "
+        f"{CONTENT_LINK_AUTHORING_RULE}"
     ),
 )
 _service: Optional[KnowledgeService] = None
@@ -48,13 +59,13 @@ def get_document(file_path: str) -> Dict[str, Any]:
 def create_document(
     file_path: str, content: str, metadata: Dict[str, Any]
 ) -> bool:
-    """创建新文档并自动生成 frontmatter、写入文件和向量化。"""
+    """创建新文档并自动生成 frontmatter、写入文件和向量化；跨文档跳转须遵守全局 kb-content-link 规则。"""
     return get_service().create_document(file_path, content, metadata)
 
 
 @mcp.tool()
 def update_document(file_path: str, content: str) -> bool:
-    """更新文档并重建该文档向量；失败时自动恢复旧版本。"""
+    """更新文档并重建该文档向量；失败时自动恢复旧版本；跨文档跳转须遵守全局 kb-content-link 规则。"""
     return get_service().update_document(file_path, content)
 
 
@@ -66,7 +77,7 @@ def delete_document(file_path: str) -> bool:
 
 @mcp.tool()
 def append_to_section(file_path: str, section: str, content: str) -> bool:
-    """向指定 Markdown 标题区域末尾追加内容，并同步更新向量。"""
+    """向指定 Markdown 标题区域末尾追加内容并同步更新向量；跨文档跳转须遵守全局 kb-content-link 规则。"""
     return get_service().append_to_section(file_path, section, content)
 
 

@@ -3,12 +3,13 @@ import { fileURLToPath, URL } from 'node:url'
 import { generateSidebar } from './sidebar'
 
 const knowledgeRoot = fileURLToPath(new URL('..', import.meta.url))
+const siteBase = process.env.VITEPRESS_BASE ?? '/'
 
 export default defineConfig({
+  base: siteBase,
   lang: 'zh-CN',
   title: 'Android 知识库',
   description: '面向 Android 学习与面试复习的本地优先知识库',
-  base: process.env.NODE_ENV === 'production' ? '/android-knowledge-base-rag-mcp/' : '/',
   cleanUrls: true,
   lastUpdated: true,
   ignoreDeadLinks: true,
@@ -18,6 +19,25 @@ export default defineConfig({
   ],
   markdown: {
     lineNumbers: true,
+    config(md) {
+      const defaultLinkOpen = md.renderer.rules.link_open
+
+      md.renderer.rules.link_open = (tokens, index, options, env, self) => {
+        const token = tokens[index]
+        const href = token.attrGet('href')
+
+        if (href?.startsWith('/') && href.includes('#')) {
+          token.attrSet('href', `${siteBase}${href.slice(1)}`)
+          token.attrJoin('class', 'kb-content-link')
+          token.attrSet('target', '_blank')
+          token.attrSet('rel', 'noopener noreferrer')
+        }
+
+        return defaultLinkOpen
+          ? defaultLinkOpen(tokens, index, options, env, self)
+          : self.renderToken(tokens, index, options)
+      }
+    },
   },
   themeConfig: {
     logo: {

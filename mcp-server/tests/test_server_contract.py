@@ -42,6 +42,31 @@ def test_server_registers_expected_tools_and_resources() -> None:
     }
 
 
+def test_server_exposes_content_link_authoring_rule() -> None:
+    instructions = server.mcp.instructions or ""
+    assert "kb-content-link" in instructions
+    assert "kb-anchor-offset" in instructions
+    assert 'target="_blank"' in instructions
+    assert 'rel="noopener noreferrer"' in instructions
+    assert "禁止使用卡片" in instructions
+
+    async def write_tool_descriptions() -> dict[str, str]:
+        return {
+            tool.name: tool.description or ""
+            for tool in await server.mcp.list_tools()
+            if tool.name
+            in {"create_document", "update_document", "append_to_section"}
+        }
+
+    descriptions = asyncio.run(write_tool_descriptions())
+    assert descriptions.keys() == {
+        "create_document",
+        "update_document",
+        "append_to_section",
+    }
+    assert all("kb-content-link" in description for description in descriptions.values())
+
+
 def test_encoded_document_resource_path(tmp_path: Path) -> None:
     service = KnowledgeService(
         MarkdownRepository(tmp_path),
