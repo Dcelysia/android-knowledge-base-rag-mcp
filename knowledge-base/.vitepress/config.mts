@@ -8,7 +8,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Android 知识库',
   description: '面向 Android 学习与面试复习的本地优先知识库',
-  base: '/android-knowledge-base-rag-mcp/',
+  base: process.env.NODE_ENV === 'production' ? '/android-knowledge-base-rag-mcp/' : '/',
   cleanUrls: true,
   lastUpdated: true,
   head: [
