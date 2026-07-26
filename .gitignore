@@ -13,3 +13,6 @@ __pycache__/
 htmlcov/
 .DS_Store
 work/
+screenshot-*.png
+skills/
+theme-templates/
