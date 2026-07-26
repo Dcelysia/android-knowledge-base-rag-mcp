@@ -14,9 +14,10 @@ from .service import KnowledgeService
 CONTENT_LINK_AUTHORING_RULE = (
     "编写或修改知识库正文时，跨文档跳转必须使用正文内联高亮链接，禁止使用卡片、按钮或 "
     "target=\"_self\"。目标内容前应放置稳定且唯一的锚点 "
-    "<span id=\"stable-kebab-case-id\" class=\"kb-anchor-offset\"></span>；链接固定写成 "
-    "<a class=\"kb-content-link\" href=\"/文档路由#stable-kebab-case-id\" "
-    "target=\"_blank\" rel=\"noopener noreferrer\">链接文字</a>。文档路由不带 .md；已有合适锚点时应复用。"
+    "<span id=\"stable-kebab-case-id\" class=\"kb-anchor-offset\"></span>；来源链接固定写成 "
+    "[链接文字](/文档路由#stable-kebab-case-id)。文档路由不带 .md；已有合适锚点时应复用。"
+    "VitePress 主题会统一渲染为 kb-content-link，并添加 target=\"_blank\" 与 "
+    "rel=\"noopener noreferrer\"，不要在正文中手写 <a>。"
 )
 
 

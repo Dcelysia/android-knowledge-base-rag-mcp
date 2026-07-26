@@ -260,11 +260,17 @@ npm run docs:preview -- --open
 
 ### 部署到 GitHub Pages
 
-当前仓库提供 VitePress 静态构建能力，但没有预设 GitHub Pages 工作流。部署到 GitHub Pages 时需要额外配置：
+仓库通过 `.github/workflows/deploy-pages.yml` 自动发布 VitePress 静态站点。推送到 `main` 后，GitHub Actions 会使用 `/android-knowledge-base-rag-mcp/` 作为站点 base，构建并部署到：
 
-- GitHub Actions 构建与发布流程；
-- 项目站点使用的 VitePress `base` 路径；
-- Repository Settings 中的 Pages 发布来源。
+```text
+https://timeisthe.github.io/android-knowledge-base-rag-mcp/
+```
+
+也可以在 GitHub Actions 页面手动运行 `Deploy VitePress to GitHub Pages` 工作流。发布前可在本地执行：
+
+```bash
+VITEPRESS_BASE=/android-knowledge-base-rag-mcp/ npm run docs:build
+```
 
 GitHub Pages 只能托管静态前端，不能运行本项目的 Python MCP Server、嵌入模型或 ChromaDB。RAG 和 MCP 默认仍在使用者本机运行。
 
@@ -443,7 +449,7 @@ subcategory: four-components
 
 - 速览层：位于 `knowledge-base/八股/` 和面试总结目录，保留高频结论、回答骨架和关键边界，适合快速复习。
 - 深挖层：位于对应技术分类目录，例如 `android-framework/view-system/`，展开角色关系、内部状态、源码链路、具体实现和容易误解的边界。
-- 速览中的可扩展主题应使用 `kb-deep-link` 卡片跳转到深挖文章；深挖文章顶部应提供返回速览的链接。
+- 速览中的可扩展主题应使用正文内联高亮链接跳转到深挖文章；深挖文章顶部应提供返回速览的链接。
 
 深挖文章默认覆盖：
 
@@ -454,15 +460,13 @@ subcategory: four-components
 5. 常见误解、失败场景和版本边界。
 6. 当前官方文档与源码参考。
 
-速览页中的跳转卡片示例：
+速览页中的跳转链接示例：
 
-```html
-<a class="kb-deep-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_self">
-  <span class="kb-deep-link__eyebrow">深入阅读 · 原理与源码</span>
-  <strong>View 事件分发、触摸目标与滑动冲突</strong>
-  <span>查看完整调用链、内部状态和具体实现。</span>
-</a>
+```markdown
+需要继续深入时，可阅读 [View 事件分发、触摸目标与滑动冲突](/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive)。
 ```
+
+目标内容前使用 `<span id="view-event-dispatch-deep-dive" class="kb-anchor-offset"></span>` 定义稳定锚点。VitePress 主题会自动为站内锚点链接添加高亮样式、新标签页属性，并适配 GitHub Pages 子路径。
 
 索引文本由标题、标签和正文共同组成。`index.md` 和 `.vitepress/` 下的文件不会作为 RAG 知识文档写入 ChromaDB。
 

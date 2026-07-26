@@ -103,15 +103,15 @@ Server 会合并 content 中已有 frontmatter 与 metadata 参数，补全创�
 <span id="view-event-dispatch-deep-dive" class="kb-anchor-offset"></span>
 ```
 
-来源文档把链接自然地写进句子中，文档路由不带 `.md`：
+来源文档把标准 Markdown 链接自然地写进句子中，文档路由不带 `.md`：
 
-```html
-需要继续深入时，可阅读 <a class="kb-content-link" href="/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive" target="_blank" rel="noopener noreferrer">View 事件分发源码链路</a>。
+```markdown
+需要继续深入时，可阅读 [View 事件分发源码链路](/android-framework/view-system/view-event-dispatch#view-event-dispatch-deep-dive)。
 ```
 
 - 已有合适锚点时直接复用，不重复添加。
-- 链接必须带 `target="_blank"`，在新页面打开。
-- 链接必须带 `rel="noopener noreferrer"`。
+- VitePress 主题会自动添加 `kb-content-link`、`target="_blank"` 和 `rel="noopener noreferrer"`。
+- 正文中不要手写 `<a>`，以便 VitePress 自动适配本地路径和 GitHub Pages 子路径。
 - 只高亮实际可点击的链接文字，不把整段内容包装成卡片。
 - 样式和定位逻辑由 VitePress 主题统一处理，MCP 写文档时不修改 `.vitepress`。
 
