@@ -1,7 +1,5 @@
 # 美团 Android 客户端日常实习一面面经（2025日常实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-02-17 原帖](https://www.nowcoder.com/feed/main/detail/592247f523b64d45bb0dd5f28bdfaf56)
 >
 > 可信度：A · 招聘类型：日常实习 · 发布日期：2025-02-17

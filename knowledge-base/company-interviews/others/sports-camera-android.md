@@ -1,7 +1,5 @@
 # 运动相机客户端：二面
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2026-04-19 原帖](https://www.nowcoder.com/feed/main/detail/4a45dad4b83e4909b6e29e5e98bfe91b)
 >
 > 可信度：A · 招聘类型：原帖未明确 · 发布日期：2026-04-19

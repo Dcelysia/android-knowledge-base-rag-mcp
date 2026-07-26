@@ -1,7 +1,5 @@
 # 腾讯 PCG 移动客户端：一、二面
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-03-23 原帖](https://www.nowcoder.com/feed/main/detail/9b5781d39efb44e887e4323c9ed049cf)
 >
 > 可信度：A · 招聘类型：春招语境，原帖未明确 · 发布日期：2024-03-23

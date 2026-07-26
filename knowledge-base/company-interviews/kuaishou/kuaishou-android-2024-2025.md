@@ -1,7 +1,5 @@
 # 快手 Android 客户端开发面经（2024-2025·一二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源一：[2025-10-21 原帖](https://www.nowcoder.com/feed/main/detail/fe67044c66ab4eb9a92a13b34c5a317e)
 > 来源二：[2024-09-02 原帖](https://www.nowcoder.com/feed/main/detail/55fdf68c266241fdba59b9d75a41601b)
 >

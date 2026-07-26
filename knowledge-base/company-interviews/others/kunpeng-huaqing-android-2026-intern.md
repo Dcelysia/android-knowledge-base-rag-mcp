@@ -1,7 +1,5 @@
 # 鲲鹏华清 Android 一面（2026 面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/2412603e720e47c994ad191eca1df0e1)
 >
 > 可信度：A · 招聘类型：Android 实习 · 页面日期：05-08（牛客仅显示月日，届次待核）

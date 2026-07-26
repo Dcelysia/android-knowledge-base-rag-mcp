@@ -1,7 +1,5 @@
 # 东方财富校招 Android 面经（2023春招·二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2023-04-11 原帖](https://www.nowcoder.com/feed/main/detail/085276974cef4c6f9e350b93bd7b7141)
 >
 > 可信度：A · 招聘类型：校招 · 发布日期：2023-04-11

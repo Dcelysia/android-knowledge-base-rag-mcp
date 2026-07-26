@@ -1,7 +1,5 @@
 # 腾讯视频客户端一面面经（2026暑期实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/d753f7e26e7946048a9f3ee8bf117fc7)
 >
 > 可信度：A · 招聘类型：暑期实习 · 页面日期：2026-05-20

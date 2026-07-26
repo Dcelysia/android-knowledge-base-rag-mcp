@@ -1,7 +1,5 @@
 # 字节跳动 剪映 Android 社招面经（2026社招·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2026-03-12 原帖](https://www.nowcoder.com/feed/main/detail/764adf1310134744ac4602d6ec7858cd)
 >
 > 可信度：A · 招聘类型：社招（2年经验）· 发布日期：2026-03-12

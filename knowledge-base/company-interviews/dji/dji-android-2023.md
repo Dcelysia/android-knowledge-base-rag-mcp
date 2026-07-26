@@ -1,7 +1,5 @@
 # 大疆 Android 一面面经（2023校招）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2023-08-29 原帖](https://www.nowcoder.com/feed/main/detail/6005589cf5dd43c8989f1dc0fbf2cb05)
 >
 > 可信度：A · 招聘类型：校招 · 发布日期：2023-08-29

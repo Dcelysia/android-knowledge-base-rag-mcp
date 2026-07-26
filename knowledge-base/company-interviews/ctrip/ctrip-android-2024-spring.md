@@ -1,7 +1,5 @@
 # 携程移动客户端 Android 实习面经（2024春招·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-05-11 原帖](https://www.nowcoder.com/feed/main/detail/14edf824921a4a40924c737ce26d8179)
 >
 > 可信度：A · 招聘类型：移动客户端实习 · 发布日期：2024-05-11

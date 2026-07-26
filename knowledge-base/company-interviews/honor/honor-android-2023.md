@@ -1,7 +1,5 @@
 # 荣耀 Android 客户端开发面经（2023校招·一二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2023-05-11 原帖](https://www.nowcoder.com/feed/main/detail/27497fb0348b42c79567c5fed12ac5ed)
 >
 > 可信度：A · 招聘类型：校招（软件开发工程师-客户端方向）· 发布日期：2023-05-11

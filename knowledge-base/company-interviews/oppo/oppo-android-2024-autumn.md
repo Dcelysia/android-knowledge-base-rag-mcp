@@ -1,7 +1,5 @@
 # OPPO 应用开发工程师面经（2024）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源一：[一面](https://www.nowcoder.com/feed/main/detail/ab7b1a7eecc9478aa17f323d8aa85d54)
 >
 > 来源二：[二面](https://www.nowcoder.com/feed/main/detail/895eec8090004d5fa49fdac1eff9230f)

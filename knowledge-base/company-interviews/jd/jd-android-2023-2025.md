@@ -1,7 +1,5 @@
 # 京东 Android 客户端开发面经（2023-2025·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源一：[2025-04-01 原帖](https://www.nowcoder.com/feed/main/detail/f87cbbe5bebd4949823a5a68dec04e52)
 > 来源二：[2023-08-30 原帖](https://www.nowcoder.com/feed/main/detail/bd5df91c8d394e1f96557720bc088ea9)
 >

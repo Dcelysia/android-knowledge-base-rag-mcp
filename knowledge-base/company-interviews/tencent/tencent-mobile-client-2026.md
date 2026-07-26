@@ -1,7 +1,5 @@
 # 腾讯移动客户端一面面经（2026暑期实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2026-05-22 原帖](https://www.nowcoder.com/feed/main/detail/022804e3c9034ac4ae74119e9da5ddb8)
 >
 > 可信度：A · 招聘类型：暑期实习 · 发布日期：2026-05-22

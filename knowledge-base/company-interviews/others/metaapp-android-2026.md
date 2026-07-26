@@ -1,7 +1,5 @@
 # MetaApp Android 实习面经（2026实习·一至二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源一：[2026-06-04 一面原帖](https://www.nowcoder.com/feed/main/detail/7ce356d8f6f84bcfa04d6f3e8a3524d1)
 >
 > 来源二：[2026-06-09 二面原帖](https://www.nowcoder.com/feed/main/detail/3d4a633bf26c4e2cb5943810e2d28301)

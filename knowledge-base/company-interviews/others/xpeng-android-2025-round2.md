@@ -1,7 +1,5 @@
 # 小鹏汽车 Android 一面面经（2025 秋招）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/discuss/814820308757610496)
 >
 > 可信度：A · 招聘类型：Android 客户端 · 发布日期：2025-11-03

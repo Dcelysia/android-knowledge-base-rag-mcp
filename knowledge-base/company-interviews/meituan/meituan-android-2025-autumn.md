@@ -1,7 +1,5 @@
 # 美团 Android 秋招面经（2025秋招·一面+二面+HR面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-08-31 原帖](https://www.nowcoder.com/feed/main/detail/3f25566ea9444c16b8ca9d875c8b618b)
 >
 > 可信度：A · 招聘类型：秋招 · 发布日期：2025-08-31

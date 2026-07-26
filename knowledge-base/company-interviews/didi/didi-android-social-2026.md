@@ -1,6 +1,6 @@
 # 滴滴社招 Android 客户端面经（面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](https://www.nowcoder.com/discuss/841039767197249536)
+· [查看来源](https://www.nowcoder.com/discuss/841039767197249536)
 
 > 可信度：A · 招聘类型：社招 Android 客户端 · 页面日期：01-14（牛客仅显示月日，届次待核）
 

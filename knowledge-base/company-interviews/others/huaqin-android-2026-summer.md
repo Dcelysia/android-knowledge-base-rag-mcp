@@ -1,7 +1,5 @@
 # 华勤技术 Android 暑期实习面经（2026 面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/916aedea86104d7882a46a1d2b3b37c4)
 >
 > 可信度：B · 招聘类型：暑期实习；原帖称已知岗位为 Android，具体届次待核 · 页面日期：06-26（牛客仅显示月日，届次待核）

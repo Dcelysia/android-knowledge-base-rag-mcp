@@ -1,7 +1,5 @@
 # 滴滴 Android：一、二、三面
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-09-12 原帖](https://www.nowcoder.com/feed/main/detail/eabea1dd15934feeb255d566bc0d9fd5)
 >
 > 可信度：A · 招聘类型：校招语境，原帖未显式命名 · 发布日期：2025-09-12

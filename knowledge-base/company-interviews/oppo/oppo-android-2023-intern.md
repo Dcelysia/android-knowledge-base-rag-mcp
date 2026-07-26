@@ -1,7 +1,5 @@
 # OPPO Android 实习面经（2023）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/discuss/552259243852705792)
 >
 > 可信度：A · 招聘类型：日常实习 · 发布日期：2023-11-09

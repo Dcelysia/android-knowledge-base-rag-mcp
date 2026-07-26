@@ -1,7 +1,5 @@
 # 阿里钉钉 Android 客户端面经（2023）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/discuss/541563874261139456)
 >
 > 可信度：A · 招聘类型：客户端/Android 秋招 · 发布日期：2023-10-11

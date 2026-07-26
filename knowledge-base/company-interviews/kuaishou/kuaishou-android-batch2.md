@@ -1,7 +1,5 @@
 # 快手 Android：面经合集（第二批）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 ## 快手国际化客户端 Android 一面（2024-05-17）
 
 > 来源：[2024-05-17 原帖](https://www.nowcoder.com/discuss/620956463560732672)

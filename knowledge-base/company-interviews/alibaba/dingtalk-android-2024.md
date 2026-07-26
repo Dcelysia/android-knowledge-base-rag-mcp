@@ -1,7 +1,5 @@
 # 钉钉 Android 客户端一面面经（2024暑期实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-03-27 原帖](https://www.nowcoder.com/feed/main/detail/4987069fb95942c7aeac2e118053c897)
 >
 > 可信度：A · 招聘类型：暑期实习 · 发布日期：2024-03-27

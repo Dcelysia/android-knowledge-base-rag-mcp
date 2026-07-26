@@ -1,7 +1,5 @@
 # 腾讯 PC 客户端开发方向 AI 面试面经（2025实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-01-11 原帖](https://www.nowcoder.com/feed/main/detail/6127a586f3644e70ae957a0efa9ed404)
 >
 > 可信度：A · 招聘类型：实习可转正 · 发布日期：2025-01-11

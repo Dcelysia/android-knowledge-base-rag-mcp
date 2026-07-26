@@ -1,7 +1,5 @@
 # 百度 Android：一、二、三面
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-07-28 原帖](https://www.nowcoder.com/feed/main/detail/834800acd0304afc942a7453af2704d5)
 >
 > 可信度：A · 招聘类型：原帖未明确 · 发布日期：2025-07-28

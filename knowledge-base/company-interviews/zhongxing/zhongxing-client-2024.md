@@ -1,7 +1,5 @@
 # 中兴客户端开发面经（2024春招·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-03-13 原帖](https://www.nowcoder.com/feed/main/detail/85d98797c9cf4a718616aea06f1b11bb)
 >
 > 可信度：A · 招聘类型：客户端开发 · 发布日期：2024-03-13

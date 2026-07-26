@@ -1,7 +1,5 @@
 # 字节跳动 抖音智能创作客户端 ByteIntern 面经（2025暑期实习·一二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-07-21 原帖](https://www.nowcoder.com/feed/main/detail/56172d8bb75f4fe8a5a991e89b569564)
 >
 > 可信度：A · 招聘类型：ByteIntern（2026届可转正）· 发布日期：2025-07-21

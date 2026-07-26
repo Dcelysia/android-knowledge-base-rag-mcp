@@ -1,7 +1,5 @@
 # 腾讯暑期实习客户端面经（2024，三面+HR面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-04-11 原帖](https://www.nowcoder.com/feed/main/detail/1efb75b494804f6a806fa6519de088f6)
 >
 > 可信度：A · 招聘类型：暑期实习 · 发布日期：2024-04-11

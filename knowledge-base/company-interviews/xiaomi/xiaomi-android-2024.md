@@ -1,7 +1,5 @@
 # 小米 Android 面经（2024秋招·一二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-09-27 原帖](https://www.nowcoder.com/feed/main/detail/e49597df7f8f42618fbd1a74ce7ad0f1)
 >
 > 可信度：A · 招聘类型：秋招，后端流程转 Android · 面试时间：2024-09-20、2024-09-24 · 发布日期：2024-09-27

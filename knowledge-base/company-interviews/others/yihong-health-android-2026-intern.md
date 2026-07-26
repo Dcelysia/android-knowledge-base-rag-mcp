@@ -1,7 +1,5 @@
 # 伊鸿健康 Android 实习一面（2026 面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/53beed25c1d142a79bf1fd2dd567a440)
 >
 > 可信度：A · 招聘类型：Android 实习 · 页面日期：06-11（牛客仅显示月日，届次待核）

@@ -1,7 +1,5 @@
 # 腾讯云智移动客户端：暑期实习一面
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2026-04-24 原帖](https://www.nowcoder.com/feed/main/detail/ab430820d1bd400891db41dd2dd712ad)
 >
 > 可信度：A · 招聘类型：暑期实习 · 发布日期：2026-04-24

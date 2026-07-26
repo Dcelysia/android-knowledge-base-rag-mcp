@@ -1,7 +1,5 @@
 # 蚂蚁集团 Android 客户端一面凉经（2025暑期实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-04-01 原帖](https://www.nowcoder.com/feed/main/detail/39010ae3b43441e0999b54b5000ae92c)
 >
 > 可信度：A · 招聘类型：暑期实习 · 发布日期：2025-04-01

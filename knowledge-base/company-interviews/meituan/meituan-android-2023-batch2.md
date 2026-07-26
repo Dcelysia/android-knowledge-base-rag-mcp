@@ -1,7 +1,5 @@
 # 美团一面安卓客户端面经（2023日常实习）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2023-08-25 原帖](https://www.nowcoder.com/feed/main/detail/91e98b0e9dee4094815eafb55399bdf9)
 >
 > 可信度：A · 招聘类型：日常实习 · 发布日期：2023-08-25

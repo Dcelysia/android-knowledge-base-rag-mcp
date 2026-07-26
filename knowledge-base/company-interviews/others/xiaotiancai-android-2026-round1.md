@@ -1,6 +1,6 @@
 # 小天才 Android 一面面经（面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](https://www.nowcoder.com/discuss/867397114064662528)
+· [查看来源](https://www.nowcoder.com/discuss/867397114064662528)
 
 > 可信度：A- · 招聘类型：Android · 页面日期：03-28（牛客仅显示月日，届次待核）
 

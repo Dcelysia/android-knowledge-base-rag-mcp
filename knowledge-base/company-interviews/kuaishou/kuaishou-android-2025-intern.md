@@ -1,7 +1,5 @@
 # 快手 Android 面经（2025日常转暑期实习·一二面+HR）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-03-13 原帖](https://www.nowcoder.com/feed/main/detail/9b9f932f60a345afb0f20162a0374e50)
 >
 > 可信度：A · 招聘类型：日常实习转暑期实习 · 发布日期：2025-03-13

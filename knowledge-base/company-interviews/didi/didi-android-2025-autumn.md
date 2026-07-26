@@ -1,7 +1,5 @@
 # 滴滴 Android 客户端开发面经（2025秋招·一面+二面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源一：[2025-10-21 原帖](https://www.nowcoder.com/feed/main/detail/5401e41a5b4545acb8ebe1abe053a166)
 > 来源二：[2025-11-03 原帖](https://www.nowcoder.com/feed/main/detail/f8bce62b914e45f7a48f1ffa3cc4825a)
 > 来源三：[2025-10-26 原帖](https://www.nowcoder.com/feed/main/detail/864651bb82764281a3f0f5af7a9b6d0a)

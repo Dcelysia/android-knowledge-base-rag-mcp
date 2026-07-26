@@ -1,7 +1,5 @@
 # 携程移动端（Android）一二面面经（2024秋招）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-11-01 原帖](https://www.nowcoder.com/feed/main/detail/f4809679d5074d099b922ac1e49983f5)
 >
 > 可信度：A · 招聘类型：秋招 · 发布日期：2024-11-01

@@ -1,7 +1,5 @@
 # 小红书 Android 客户端校招一面面经（2025秋招）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-09-17 原帖](https://www.nowcoder.com/feed/main/detail/73cc3e5a32ae48d79b40c3060909ca21)
 >
 > 可信度：A · 招聘类型：校招 · 发布日期：2025-09-17

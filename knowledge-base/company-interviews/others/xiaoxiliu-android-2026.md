@@ -1,7 +1,5 @@
 # 小溪流科技 Android 开发一面（2026 面经流，届次待核）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/39e70cb4b94c4a3db66bd830d3b44a1f)
 >
 > 可信度：B · 招聘类型：Android 开发，校招/社招待核 · 页面日期：07-18（牛客仅显示月日，届次待核）

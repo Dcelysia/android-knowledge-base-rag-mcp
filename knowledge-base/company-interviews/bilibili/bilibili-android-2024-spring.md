@@ -1,7 +1,5 @@
 # 哔哩哔哩 Android 面经（2024春招·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2024-04-25 原帖](https://www.nowcoder.com/feed/main/detail/10da7a46c08d42c99c1655cfee0c1b08)
 >
 > 可信度：A · 招聘类型：春招 · 面试时间：2024-04-12 · 发布日期：2024-04-25

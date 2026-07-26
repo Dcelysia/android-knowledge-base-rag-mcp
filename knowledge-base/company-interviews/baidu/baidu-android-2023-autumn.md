@@ -1,7 +1,5 @@
 # 百度 Android 面经（2023 秋招）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[牛客原帖](https://www.nowcoder.com/feed/main/detail/af2d24c41e0c46dcb7116e8c219f74b2)
 >
 > 可信度：A · 招聘类型：Android 秋招 · 发布日期：2023-11-02

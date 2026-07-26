@@ -1,7 +1,5 @@
 # MetaApp Android 春招面经（2025·一面）
 
-[返回面经总览](../README.md) · [查看来源](../_sources.md)
-
 > 来源：[2025-03-21 原帖](https://www.nowcoder.com/feed/main/detail/70f5340e243842b7b522b9b0e1a4a015)
 >
 > 可信度：A · 招聘类型：春招 · 发布日期：2025-03-21
